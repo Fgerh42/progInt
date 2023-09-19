@@ -11,7 +11,6 @@ export default {
       erros: [],
       status: 0
     }
-    console.log(dados)
     await api.post('login', dados)
       .then(function(response) { 
         if (response.status === 200) {
