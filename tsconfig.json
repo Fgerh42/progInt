@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "lib": ["ES2015"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.vue"],
+  "exclude": ["node_modules"]
+}

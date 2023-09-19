@@ -1,0 +1,31 @@
+@import "bootstrap/scss/functions"; 
+
+$theme-colors: (
+"primary": #199AF5,
+"secondary": #555555,
+"success": #49be25,
+"info": #555555,
+"warning": #F2BC07,
+"danger": #DB2512,
+"light": #FEFEFE,
+"dark": #333333
+);
+
+:root {
+  --primary: $primary;
+}
+
+@import "bootstrap/scss/bootstrap";
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+  border-radius: 10px;
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
