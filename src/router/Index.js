@@ -38,18 +38,18 @@ router.beforeEach((to, from, next) => {
   }
 
   if (to.matched.some((record) => record.meta.needAuth)) {
-    if (!token) {
-      next({ path: "/login" });
-    } else {
-      auth.me().then((val) => {
-        if (val.ok) {
+    // if (!token) {
+    //   next({ path: "/login" });
+    // } else {
+    //   auth.me().then((val) => {
+    //     if (val.ok) {
           next();
-        } else {
-          localStorage.clear();
-          next({ path: "/login" });
-        }
-      });
-    }
+    //     } else {
+    //       localStorage.clear();
+    //       next({ path: "/login" });
+    //     }
+    //   });
+    // }
   } else {
     next();
   }

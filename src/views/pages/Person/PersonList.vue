@@ -1,6 +1,21 @@
 <template>
   
-    <v-col>
+  <v-dialog
+    v-model="modal_delete"
+    max-width="500px"
+  >
+    <v-card>
+      <v-card-title class="headline">Deletar</v-card-title>
+      <v-card-text>Você tem certeza que quer deletar?</v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="red" text @click="deletePerson()"> Deletar </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+      <div style="height: 20px;"></div>
+
       <base-button
         :isPrimary="true"
         text="Adicionar novo cadastro"
@@ -8,7 +23,8 @@
         to="/person/register"
       >
       </base-button>
-    </v-col>
+
+      <div style="height: 20px;"></div>
     <v-row>
       <v-col>
         <v-table fixed-header over class="elevation-3 rounded text-body-2">
@@ -22,20 +38,18 @@
           </thead>
           <tbody>
             <tr v-for="item in people" :key="item.description">
-              <td>{{ item.name }}</td>
+              <td>{{ item.nome }}</td>
               <td>{{ item.email }}</td>
-              <td>{{ item.phone }}</td>
-              <td>{{ item.birthday }}</td> 
+              <td>{{ item.telefone }}</td>
+              <td>{{ item.data_nascimento }}</td> 
               <td></td>
   
               <td class="text-right">
                 <btn-editar
-                  v-show="item.permissions.update"
                   style="padding-right: 5px"
                   :href="`/person/${item.id}/edit`"
                 />
                 <btn-deletar
-                  v-show="item.permissions.delete"
                   style="padding-left: 5px"
                   @click="showModalDelete(item.id)"
                 />
@@ -45,15 +59,6 @@
         </v-table>
       </v-col>
     </v-row>
-    <v-col align="center">
-      <vue-awesome-paginate
-        :total-items="pages"
-        :items-per-page="1"
-        :max-pages-shown="5"
-        v-model="page"
-        @click="changePage"
-      />
-    </v-col>
   </template>
     
     <script lang="ts">
@@ -62,43 +67,26 @@ import person from "@/api/person";
   export default {
     data() {
         return {
-      people: [],
-      pages: 0,
-      page: 1,
+          id_to_delete: 0,
+          modal_delete: false,
+          people: [],
     };
     },
     mounted() {
       this.build();
     },
     methods: {
-      async search(): Promise<void> {
-        person.list(this.page, 15).then((result) => {
-          if (result.ok) {
-            this.people = result.dados.data;
-            this.pages = result.dados.meta.last_page;
-          } else {
-            this.$toasts.error(result.msg);
-          }
-        });
-      },
-  
-      async changePage(pag: number): Promise<void> {
-        this.page = pag;
-        this.build();
-      },
-  
       async build(): Promise<void> {
-        person.list(this.page, 15).then((result) => {
+        person.list().then((result) => {
           if (result.ok) {
-            this.functions = result.dados.data;
-            this.pages = result.dados.meta.last_page;
+            this.people = result.dados; 
           } else {
             this.$toasts.error(result.msg);
           }
         });
       },
   
-      async deleteVehicle(): Promise<void> {
+      async deletePerson(): Promise<void> {
         person.delete(this.id_to_delete).then((result) => {
           this.build();
           if (result.ok) {
@@ -111,7 +99,7 @@ import person from "@/api/person";
         });
       },
   
-      showModalDelete(id: String): void {
+      showModalDelete(id): void {
         this.id_to_delete = id;
         this.modal_delete = true;
       },

@@ -13,7 +13,7 @@
           <v-col cols="12">
             <v-text-field
               :rules="geralRule"
-              v-model="form.name"
+              v-model="form.nome"
               label="Nome"
             />
           </v-col>
@@ -22,7 +22,8 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :rules="geralRule"
-              v-model="form.phone"
+              v-model="form.telefone"
+              v-mask="`(##) # ####-####`"
               type="tel"
               label="Telefone"
             />
@@ -37,9 +38,10 @@
         </v-row>
           <v-col cols="12" sm="6">
             <v-text-field
-             hint="dd/mm/aaaa"
+             hint="aaaa/mm/dd"
              type="tel"
-             v-mask="`##/##/####`"
+             v-model="form.data_nascimento"
+             v-mask="`####-##-##`"
              label="Data nascimento"
              required
              :rules="geralRule" 
@@ -68,10 +70,10 @@
     data() {
       return {
         form: {
-            name:'',
-            phone:'',
+            nome:'',
+            telefone:'',
             email:'',
-            date:''
+            data_nascimento:''
         },
         geralRule,
         selectorRule,
@@ -86,13 +88,12 @@
   
       async save(): Promise<void> {
         if (this.$route.params.id) {
-          person.edit(this.form, this.$route.params.id).then(
+          person.edit(this.form).then(
             (result) => {
               if (result.ok) {
                 this.$toasts.success(result.msg);
-                this.$router.push("/dispositivo");
+                this.$router.push("/person");
               } else {
-                this.form.days_week = [];
                 this.$toasts.error(result.msg);
               }
             }
@@ -101,9 +102,8 @@
           person.save(this.form).then((result) => {
             if (result.ok) {
               this.$toasts.success(result.msg);
-              this.$router.push("/dispositivo");
+              this.$router.push("/person");
             } else {
-              this.form.days_week = [];
               this.$toasts.error(result.msg);
             }
           });
@@ -111,14 +111,14 @@
       },
     },
     watch: {
-      device(val) {
+      person(val) {
         if (val) {
           this.form = {
             id : val.id,
-            name : val.name,
-            phone : val.phone,
+            nome : val.nome,
+            telefone : val.telefone,
             email : val.email, 
-            date : val.date, 
+            data_nascimento : val.data_nascimento, 
           }
         }
       },

@@ -1,7 +1,7 @@
 export const geralRule = [
   (v) => {
-    if (v && v.length >= 3) return true;
-    return "Preencha o campo com pelo menos 3 digito";
+    if (v && v.length >= 1) return true;
+    return "Preencha o campo";
   },
 ];
 

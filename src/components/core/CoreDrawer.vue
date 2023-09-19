@@ -3,7 +3,7 @@
     <v-list>
       <v-list-item
         prepend-avatar="src/assets/images/user.png"
-        title="Admn"
+        title="Admin"
       ></v-list-item>
     </v-list>
 

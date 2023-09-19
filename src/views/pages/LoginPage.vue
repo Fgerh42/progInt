@@ -83,13 +83,13 @@ export default {
       this.disableButton = true;
 
 
-      auth.login(this.form).then((result) => {
-        if (result.ok) {
+      auth.login(this.form).then((result) => { 
+        if (result.dados.data.token) {
           this.$toasts.success(result.msg);
           this.$router.push("/");
           localStorage.setItem("data", JSON.stringify(result.dados));
         } else {
-          this.$toasts.error(result.msg);
+          this.$toasts.error("Erro ao fazer login");
         }
       });
     },

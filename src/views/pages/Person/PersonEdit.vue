@@ -1,14 +1,12 @@
 <template>
-    <v-row style="padding-bottom: 20px">
-      <v-col>
+    <div style="height: 20px;"></div>  
         <base-button
           :isPrimary="false"
           text="Voltar"
           icon="mdi-arrow-left"
           to="/person"
-        />
-      </v-col>
-    </v-row>
+        /> 
+    <div style="height: 20px;"></div> 
     <PersonForm :person="personObject" />
   </template>
   
@@ -35,7 +33,7 @@
     methods: {
       async search(): Promise<void> {
         person.search(this.$route.params.id).then((result) => {
-          this.personObject = result.dados.data;
+          this.personObject = result.dados;
         });
       },
     },
