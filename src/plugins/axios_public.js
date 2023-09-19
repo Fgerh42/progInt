@@ -3,6 +3,10 @@ import axios from 'axios'
 const api = axios.create({
   baseURL: import.meta.env.APP_URL_SERVIDOR,
   timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
 })
 
 api.interceptors.request.use(

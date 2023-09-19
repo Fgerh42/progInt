@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
 
   let token = "";
   if (data) {
-    token = data.data.token;
+    token = data.token;
   }
 
   if (to.matched.some((record) => record.meta.needAuth)) {

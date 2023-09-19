@@ -87,7 +87,7 @@ export default {
         if (result.ok) {
           this.$toasts.success(result.msg);
           this.$router.push("/");
-          localStorage.setItem("data", JSON.stringify(result.dados.data));
+          localStorage.setItem("data", JSON.stringify(result.dados));
         } else {
           this.$toasts.error(result.msg);
         }
