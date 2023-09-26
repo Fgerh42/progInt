@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "@/views/pages/LoginPage.vue";
 
 import Person from "./module/Person";
+import FinancialTitle from "./module/FinancialTitle";
 
 import Index from "@/views/Index.vue";
 import auth from "@/api/auth";
+
 
 const routes = [
   {
@@ -20,6 +22,7 @@ const routes = [
     children: [
 
       ...Person, 
+      ...FinancialTitle
     ],
   },
 ];

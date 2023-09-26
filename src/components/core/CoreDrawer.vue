@@ -16,6 +16,12 @@
         title="Pessoas"
         value="person"
       /> 
+      <v-list-item
+        to="/financial"
+        prepend-icon="mdi-cash"
+        title="Financeiro"
+        value="financial"
+      /> 
     </v-list>
 
     <template v-slot:append>
